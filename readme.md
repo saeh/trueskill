@@ -10,8 +10,8 @@ You have two options:
 
 1. run ``make`` in the root directory and launch the program
    via ``bin/runner``
-2. run ``python setup.py build_ext -i`` to create the ``.so``
-   file, and run the python test sample via ``python ptest.py``
+2. run ``python3 setup.py build_ext -i`` to create the ``.so``
+   file, and run the python test sample via ``python3 ptest.py``
 
 benchmark
 =========

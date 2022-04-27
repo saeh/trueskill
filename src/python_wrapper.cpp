@@ -39,7 +39,7 @@ static PyObject* _adjust_players(PyObject* self, PyObject* args) {
 		// convert the tuple items into their c types
 		p->mu = PyFloat_AsDouble(PyTuple_GetItem(py_tuple, 0));
 		p->sigma = PyFloat_AsDouble(PyTuple_GetItem(py_tuple, 1));
-		p->rank = (int)PyInt_AsLong(PyTuple_GetItem(py_tuple, 2));
+		p->rank = (int)PyLong_AsLong(PyTuple_GetItem(py_tuple, 2));
 
 		// add the player to the players vector
 		players.push_back(p);
@@ -58,7 +58,7 @@ static PyObject* _adjust_players(PyObject* self, PyObject* args) {
 		py_tuple = PyTuple_New(3);
 		PyTuple_SetItem(py_tuple, 0, PyFloat_FromDouble(players[i]->mu));
 		PyTuple_SetItem(py_tuple, 1, PyFloat_FromDouble(players[i]->sigma));
-		PyTuple_SetItem(py_tuple, 2, PyInt_FromLong((long)players[i]->rank));
+		PyTuple_SetItem(py_tuple, 2, PyLong_FromLong((long)players[i]->rank));
 
 		// push the tuple onto the list
 		PyList_SetItem(result, i, py_tuple);
@@ -69,10 +69,19 @@ static PyObject* _adjust_players(PyObject* self, PyObject* args) {
 }
 
 static PyMethodDef functions[] = {
-	{"adjust_players", _adjust_players, METH_VARARGS},
-	{NULL, NULL}
+	{"adjust_players", _adjust_players, METH_VARARGS, "trueskill implementation in c"},
+	{NULL, NULL, 0, NULL}
 };
 
-PyMODINIT_FUNC init_trueskill(void) {
-	Py_InitModule4("_trueskill", functions, "trueskill module", NULL, PYTHON_API_VERSION);
+static PyModuleDef module = {
+   PyModuleDef_HEAD_INIT,
+   "_trueskill", /* name of module */
+   NULL,       /* module documentation, may be NULL */
+   -1,         /* size of per-interpreter state of the module,
+                  or -1 if the module keeps state in global variables. */
+   functions
+};
+
+PyMODINIT_FUNC PyInit__trueskill() {
+	return PyModule_Create(&module);
 }
