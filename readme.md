@@ -1,3 +1,12 @@
+# 2022-04 Edit
+
+I've modified this to run with Python3.x.x
+
+All Other details remain the same.
+
+---------------
+## Original Readme
+
 another trueskill implementation; c++ with wrappers for python
 
 This is a port of [dougz/trueskill](https://github.com/dougz/trueskill)
@@ -10,8 +19,8 @@ You have two options:
 
 1. run ``make`` in the root directory and launch the program
    via ``bin/runner``
-2. run ``python3 setup.py build_ext -i`` to create the ``.so``
-   file, and run the python test sample via ``python3 ptest.py``
+2. run ``python setup.py build_ext -i`` to create the ``.so``
+   file, and run the python test sample via ``python ptest.py``
 
 benchmark
 =========
